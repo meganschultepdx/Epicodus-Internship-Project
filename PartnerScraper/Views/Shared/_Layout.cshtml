@@ -1,0 +1,38 @@
+@using Microsoft.Extensions.Options
+@using PartnerScraper.Config
+@inject IOptions<ReactSettings> ReactSettings
+
+<!doctype html>
+<html lang="en">
+<head>
+	<base href="~/" />
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Partner Scraper</title>
+
+	<link rel="icon" href="~/images/favicon.ico" type="image/x-icon">
+
+	@if (!bool.Parse(ReactSettings.Value.HotReloading))
+	{
+		<link rel="stylesheet" href="~/dist/styles.css" asp-append-version="true" />
+	}
+
+</head>
+
+<body>
+	<div id="ariaControlled" aria-hidden="false">
+
+		<main id="container-page" role="main" tabindex="-1">
+			<section id="content-center">
+				@RenderBody()
+			</section>
+		</main>
+
+
+	</div>
+
+	<script src="~/dist/vendors~bundle.js" asp-append-version="true"></script>
+	<script src="~/dist/bundle.js" asp-append-version="true"></script>
+</body>
+</html>

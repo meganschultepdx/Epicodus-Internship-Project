@@ -1,0 +1,90 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <UserSecretsId>09b92175-59a7-4e1d-96c3-e98f67c299d7</UserSecretsId>
+    <TypeScriptToolsVersion>3.2</TypeScriptToolsVersion>
+    <Configurations>Debug;Release;Dev;QA;Local</Configurations>
+  </PropertyGroup>
+
+  <ItemGroup>
+	  <DotNetCliToolReference Include="Microsoft.DotNet.Xdt.Tools" Version="2.0.0" />
+    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App">
+      <PrivateAssets Condition="'%(PackageReference.Version)' == ''">all</PrivateAssets>
+      <Publish Condition="'%(PackageReference.Version)' == ''">true</Publish>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNetCore.DataProtection.AzureStorage" Version="2.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="2.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.1" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Redis" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Log4Net.AspNetCore" Version="2.2.6" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Primitives" Version="2.2.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
+  </ItemGroup>
+
+  <!-- This ItemGroup is for the SQLite DB, may need altered  -->
+  <ItemGroup>
+    <None Update="partner_scraper.db" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="package.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="log4net.development.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="log4net.local.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="log4net.production.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="log4net.qa.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+	<!--Enables Transform on web.config files based off Configuration Manager setting -->
+	<Target Name="ApplyXdtConfigTransform" BeforeTargets="_TransformWebConfig">
+		<PropertyGroup>
+			<_SourceWebConfig>$(MSBuildThisFileDirectory)Web.base.config</_SourceWebConfig>
+			<_XdtTransform>$(MSBuildThisFileDirectory)Web.base.$(Configuration).config</_XdtTransform>
+			<_TargetWebConfig>$(PublishDir)Web.config</_TargetWebConfig>
+		</PropertyGroup>
+		<Exec Command="dotnet transform-xdt --xml &quot;$(_SourceWebConfig)&quot; --transform &quot;$(_XdtTransform)&quot; --output &quot;$(_TargetWebConfig)&quot;" Condition="Exists('$(_XdtTransform)')" />
+	</Target>
+
+	<Target Name="ApplyXdtConfigTransform" BeforeTargets="Build">
+		<PropertyGroup>
+			<_SourceWebConfig>$(MSBuildThisFileDirectory)Web.base.config</_SourceWebConfig>
+			<_XdtTransform>$(MSBuildThisFileDirectory)Web.base.$(Configuration).config</_XdtTransform>
+			<_TargetWebConfig>$(MSBuildThisFileDirectory)Web.config</_TargetWebConfig>
+		</PropertyGroup>
+		<Exec Command="dotnet transform-xdt --xml &quot;$(_SourceWebConfig)&quot; --transform &quot;$(_XdtTransform)&quot; --output &quot;$(_TargetWebConfig)&quot;" Condition="Exists('$(_XdtTransform)')" />
+	</Target>
+
+	<Target Name="PreCompileComputeCompilePackageInstall" BeforeTargets="PreComputeCompileTypeScriptWithTSConfig">
+		<Exec Command="npm install" />
+	</Target>
+
+	<Target Name="PreBuildScripts" BeforeTargets="Build">
+		<Exec Command="npm run builddev" Condition="'$(Configuration)' == 'Dev'" />
+		<Exec Command="npm run buildqa" Condition="'$(Configuration)' == 'QA'" />
+		<Exec Command="npm run buildprod" Condition="'$(Configuration)' == 'Release'" />
+	</Target>
+</Project>

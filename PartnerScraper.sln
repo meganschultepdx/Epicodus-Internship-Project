@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29209.62
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PartnerScraper", "PartnerScraper\PartnerScraper.csproj", "{5C2333C5-9632-4CE6-A9BF-6EA73DE4F9E5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Class Libraries", "Class Libraries", "{2DEFA149-1E8D-47EB-A568-C7E200B202FF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{921346AE-DB00-4D14-820A-4E48CF3DC048}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Dev|Any CPU = Dev|Any CPU
+		Local|Any CPU = Local|Any CPU
+		QA|Any CPU = QA|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5C2333C5-9632-4CE6-A9BF-6EA73DE4F9E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C2333C5-9632-4CE6-A9BF-6EA73DE4F9E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C2333C5-9632-4CE6-A9BF-6EA73DE4F9E5}.Dev|Any CPU.ActiveCfg = Dev|Any CPU
+		{5C2333C5-9632-4CE6-A9BF-6EA73DE4F9E5}.Dev|Any CPU.Build.0 = Dev|Any CPU
+		{5C2333C5-9632-4CE6-A9BF-6EA73DE4F9E5}.Local|Any CPU.ActiveCfg = Local|Any CPU
+		{5C2333C5-9632-4CE6-A9BF-6EA73DE4F9E5}.Local|Any CPU.Build.0 = Local|Any CPU
+		{5C2333C5-9632-4CE6-A9BF-6EA73DE4F9E5}.QA|Any CPU.ActiveCfg = QA|Any CPU
+		{5C2333C5-9632-4CE6-A9BF-6EA73DE4F9E5}.QA|Any CPU.Build.0 = QA|Any CPU
+		{5C2333C5-9632-4CE6-A9BF-6EA73DE4F9E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C2333C5-9632-4CE6-A9BF-6EA73DE4F9E5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6C1D506E-C065-44E2-8734-ADC8C29DF4FC}
+	EndGlobalSection
+EndGlobal
