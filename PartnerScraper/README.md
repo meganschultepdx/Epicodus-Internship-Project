@@ -31,7 +31,7 @@ Create a pull request on GitHub.
 
 ## Technologies Used
 
-- React
+- React with hooks
 - Typescript
 - C#
 - .NET 2.1
